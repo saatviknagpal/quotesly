@@ -97,7 +97,7 @@ export default function Signup() {
             {" "}
             Already have an account?{" "}
             <a
-              href="/signup"
+              href="/login"
               className="font-medium text-purple-600 hover:underline"
             >
               Login

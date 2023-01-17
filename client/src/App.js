@@ -1,14 +1,14 @@
 import "./App.css";
-import Login from "./components/Login";
-import Profile from "./components/Profile";
-import Signup from "./components/Signup";
+import { routes } from "./routes";
+import Navbar from "./components/Navbar";
+import { useRoutes } from "react-router-dom";
 
 function App() {
+  const element = useRoutes(routes);
   return (
     <div className="bg-slate-100 App">
-      {/* <Login /> */}
-      {/* <Signup /> */}
-      <Profile />
+      <Navbar />
+      {element}
     </div>
   );
 }
