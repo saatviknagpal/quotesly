@@ -12,13 +12,13 @@ export default function CreateQuote() {
     <>
       <div className="relative flex flex-col justify-center items-center text-center min-h-screen overflow-hidden">
         <div className="w-11/12 p-6 m-auto bg-white rounded-xl shadow-xl lg:max-w-xl space-y-5">
-          <h1 className="text-3xl font-semibold text-center text-purple-700">
+          <h1 className="text-3xl font-semibold text-center text-red-600">
             Add a new quote
           </h1>
           <form onSubmit={handleSubmit} className="space-y-5">
             <textarea
               type="text"
-              className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full px-4 py-2 mt-2 text-red-600 bg-white border rounded-md focus:border-red-400 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
               name="quote"
               value={quote}
               placeholder="Write your quote here"
@@ -26,7 +26,7 @@ export default function CreateQuote() {
             />
             <button
               type="submit"
-              className="bg-green-300 text-xl p-3 rounded-full font-bold text-white"
+              className="bg-red-500 text-xl p-3 rounded-full font-bold text-white"
             >
               Create Quote
             </button>
