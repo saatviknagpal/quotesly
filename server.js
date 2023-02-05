@@ -1,10 +1,11 @@
 // import ApolloServer, gql and mongoose modules
 import { ApolloServer, gql } from "apollo-server";
 import mongoose from "mongoose";
-
+import * as dotenv from "dotenv";
+dotenv.config();
 // import typeDefs, MONGO_URL
 import typeDefs from "./schemaGql.js";
-import { JWT_SECRET, MONGO_URL } from "./config.js";
+// import { JWT_SECRET, MONGO_URL } from "./config.js";
 
 // import ApolloServerPluginLandingPageGraphQLPlayground to enable GraphQL Playground
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
@@ -16,7 +17,7 @@ import resolvers from "./resolvers.js";
 import jwt from "jsonwebtoken";
 
 // connect to MongoDB using mongoose
-mongoose.connect(MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -34,7 +35,7 @@ const server = new ApolloServer({
   context: ({ req }) => {
     const { authorization } = req.headers;
     if (authorization) {
-      const { userId } = jwt.verify(authorization, JWT_SECRET);
+      const { userId } = jwt.verify(authorization, process.env.JWT_SECRET);
       return { userId };
     }
   },
