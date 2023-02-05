@@ -4,9 +4,13 @@
   "description": "",
   "type": "module",
   "main": "server.js",
-  "start": "nodemon server",
+  "start": "node src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "babel-node src/server.js",
+    "prebuild": "rimraf dist && mkdir dist",
+    "build": "babel src -d dist",
+    "start": "node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +21,13 @@
     "dotenv": "^16.0.3",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.3",
-    "react-router-dom": "^6.6.2"
+    "react-router-dom": "^6.6.2",
+    "rimraf": "^4.1.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2"
   }
 }

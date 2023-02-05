@@ -5,7 +5,6 @@ import * as dotenv from "dotenv";
 dotenv.config();
 // import typeDefs, MONGO_URL
 import typeDefs from "./schemaGql.js";
-// import { JWT_SECRET, MONGO_URL } from "./config.js";
 
 // import ApolloServerPluginLandingPageGraphQLPlayground to enable GraphQL Playground
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";

@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "./config.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 const User = mongoose.model("User");
 const Quote = mongoose.model("Quote");
 
@@ -50,7 +51,7 @@ const resolvers = {
       if (!doMatch) {
         throw new Error("Email or Password is invalid");
       }
-      const token = jwt.sign({ userId: user._id }, JWT_SECRET);
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
       return { token };
     },
     //This code creates a new quote with the given name and saves it to the database, returning a success message if successful.
