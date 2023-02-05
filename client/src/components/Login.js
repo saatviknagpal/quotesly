@@ -1,6 +1,27 @@
+import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_USER } from "../graphqloperations/mutations";
+import { GET_MY_PROFILE } from "../graphqloperations/queries";
+import Spinner from "./Spinner";
 export default function Login() {
   const [formData, setFormData] = useState({});
+  const [signinUser, { data, loading, error, client }] = useMutation(
+    LOGIN_USER,
+    {
+      refetchQueries: [GET_MY_PROFILE, `getMyProfile`],
+      onCompleted(data) {
+        localStorage.setItem("token", data.user.token);
+        client.resetStore();
+        navigate("/");
+      },
+    }
+  );
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -11,14 +32,23 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    signinUser({
+      variables: {
+        userSign: formData,
+      },
+    });
   };
 
   return (
     <>
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
         <div className="w-11/12 p-6 m-auto bg-white rounded-xl shadow-xl lg:max-w-xl">
-          <h1 className="text-3xl font-semibold text-center text-red-500">
+          {error && (
+            <div className="text-white text-center p-4 bg-black font-bold">
+              {error.message}
+            </div>
+          )}
+          <h1 className="text-3xl p-3 font-semibold text-center text-red-500">
             Login
           </h1>
           <form className="mt-6" onSubmit={handleSubmit}>

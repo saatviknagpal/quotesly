@@ -1,7 +1,17 @@
+import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import { SIGNUP_USER } from "../graphqloperations/mutations";
+import Spinner from "./Spinner";
 export default function Signup() {
   const [formData, setFormData] = useState({});
+  const [signupUser, { data, loading, error }] = useMutation(SIGNUP_USER);
 
+  if (loading) {
+    return <Spinner />;
+  }
+  if (error) {
+    console.log(error.message);
+  }
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -11,14 +21,28 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    signupUser({
+      variables: {
+        userNew: formData,
+      },
+    });
   };
 
   return (
     <>
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
         <div className="w-11/12 p-6 m-auto bg-white rounded-xl shadow-xl lg:max-w-xl">
-          <h1 className="text-3xl font-semibold text-center text-red-600">
+          {error && (
+            <div className="text-white text-center p-4 bg-black font-bold">
+              {error.message}
+            </div>
+          )}
+          {data && data.user && (
+            <div className="text-white text-center p-4 bg-green-500 font-bold">
+              {data.user.firstName} is SignedUp. You can login now
+            </div>
+          )}
+          <h1 className="text-3xl pt-3 font-semibold text-center text-red-600">
             Signup
           </h1>
           <form className="mt-6" onSubmit={handleSubmit}>

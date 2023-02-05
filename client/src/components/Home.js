@@ -14,14 +14,19 @@ export default function Home() {
     console.log(error.message);
   }
 
-  console.log(data);
-
   return (
     <>
-      <div className="relative flex flex-col min-h-screen overflow-hidden text-center pt-20 space-y-5">
-        {data.quotes.map((data, index) => {
-          return <Quote data={data} key={index} />;
-        })}
+      <div className="relative flex flex-col min-h-screen overflow-hidden text-center py-20 space-y-10">
+        {data?.quotes?.length !== 0 ? (
+          data?.quotes
+            .slice()
+            .reverse()
+            ?.map((data, index) => {
+              return <Quote data={data} key={index} />;
+            })
+        ) : (
+          <p>No Quotes Available </p>
+        )}
       </div>
     </>
   );

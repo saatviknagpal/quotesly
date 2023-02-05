@@ -19,19 +19,22 @@ export default function Quote({ data }) {
         </svg>
         <blockquote>
           <p className="text-2xl italic font-medium text-gray-900 ">
-            "{data.name}"
+            {data.name}
           </p>
         </blockquote>
         <figcaption className="flex items-center justify-center mt-6 space-x-2">
           <img
             className="w-6 h-6 rounded-full mix-blend-multiply"
-            src="https://xsgames.co/randomusers/avatar.php?g=pixel"
+            src={`https://ui-avatars.com/api/?background=random&name=${data.by.firstName}+${data.by.lastName}`}
             alt="profile"
           />
           <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
-            <cite className="pr-3 font-medium text-gray-900 ">
+            <a
+              href={`/profile/${data.by._id}`}
+              className="pr-3 font-medium text-gray-900 "
+            >
               {data.by.firstName}
-            </cite>
+            </a>
           </div>
         </figcaption>
       </figure>
