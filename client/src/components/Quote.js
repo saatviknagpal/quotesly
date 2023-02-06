@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Quote({ data }) {
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <figure className="max-w-screen-md mx-auto text-center bg-gray-200 w-[280px] md:w-[768px] p-4 rounded-xl">
