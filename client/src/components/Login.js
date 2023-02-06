@@ -13,7 +13,7 @@ export default function Login() {
       onCompleted(data) {
         localStorage.setItem("token", data.user.token);
         client.resetStore();
-        navigate("/");
+        navigate("/profile");
       },
     }
   );

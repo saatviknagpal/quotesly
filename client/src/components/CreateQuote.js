@@ -1,14 +1,18 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CREATE_QUOTE } from "../graphqloperations/mutations";
 import { GET_ALL_QUOTES } from "../graphqloperations/queries";
 import Spinner from "./Spinner";
 
 export default function CreateQuote() {
   const [quote, setQuote] = useState("");
-
+  const navigate = useNavigate();
   const [createQuote, { loading, data, error }] = useMutation(CREATE_QUOTE, {
     refetchQueries: [`getAllQuotes`, `getMyProfile`],
+    onCompleted(data) {
+      navigate("/");
+    },
   });
 
   if (loading) {
