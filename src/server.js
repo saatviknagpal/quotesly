@@ -7,7 +7,7 @@ dotenv.config();
 import typeDefs from "./schemaGql.js";
 
 // import ApolloServerPluginLandingPageGraphQLPlayground to enable GraphQL Playground
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+import { ApolloServerPluginLandingPageDisabled } from "apollo-server-core";
 
 // import models and resolvers from other files for MongoDB
 import "./models/Quotes.js";
@@ -38,7 +38,7 @@ const server = new ApolloServer({
       return { userId };
     }
   },
-  // plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  plugins: [ApolloServerPluginLandingPageDisabled()],
 });
 
 // start the server and log a message when ready
