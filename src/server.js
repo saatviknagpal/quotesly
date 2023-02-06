@@ -38,7 +38,7 @@ const server = new ApolloServer({
       return { userId };
     }
   },
-  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  // plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
 // start the server and log a message when ready
